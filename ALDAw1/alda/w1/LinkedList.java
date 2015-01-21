@@ -29,10 +29,11 @@ import java.util.Iterator;
 
 import alda.linear.List.Node;
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+//<<<<<<< Updated upstream
+//=======
+
+//>>>>>>> Stashed changes
 //<<<<<<< Updated upstream
 //=======
 
@@ -42,18 +43,43 @@ public class LinkedList<T> implements ALDAList<T>{
 	 * It also contains the actual data.
 	 */
 
+	/**
+	 * This is the node that represents an element in the list. It also contains
+	 * the actual data.
+	 */
 	private static class Node<T> {
 		T data;
 		Node<T> next;
-		
+
 		public Node(T data) {
 			this.data = data;
 		}
 	}
-	
+
 	private Node<T> head;
 	private Node<T> tail;
 
+	// private class LinkedListIterator implements Iterator<T>{
+	// Node <T> current=
+	// @Override
+	// public boolean hasNext() {
+	// // TODO Auto-generated method stub
+	// return false;
+	// }
+	//
+	// @Override
+	// public T next() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public void remove() {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// }
 	@Override
 	public Iterator iterator() {
 		// TODO Auto-generated method stub
@@ -62,10 +88,10 @@ public class LinkedList<T> implements ALDAList<T>{
 
 	@Override
 	public void add(T data) {
-		if(head == null){
+		if (head == null) {
 			head = new Node<T>(data);
 			tail = head;
-		}else{
+		} else {
 			tail.next = new Node<T>(data);
 			tail = tail.next;
 		}
@@ -110,95 +136,99 @@ public class LinkedList<T> implements ALDAList<T>{
 				counter++;
 			}
 		}
+	
 
 	@Override
 	public T remove(int index) {
-		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
-		
+		if (index < 0 || index >= size())
+			throw new IndexOutOfBoundsException();
+
 		int counter = 0;
 		Node<T> previous = null;
-		
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(counter == index){
-				if(tmp == head){
+
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+			if (counter == index) {
+				if (tmp == head) {
 					head = tmp.next;
 					return tmp.data;
-				}else if(tmp == tail){
+				} else if (tmp == tail) {
 					previous.next = null;
 					tail = previous;
 					return tmp.data;
-				}else{
+				} else {
 					previous.next = tmp.next;
 					return tmp.data;
 				}
 			}
 			previous = tmp;
+			counter++;
 		}
-		
 		return null;
 	}
 
 	@Override
 	public boolean remove(T data) {
 		Node<T> previous = null;
-		
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(tmp.data == data || tmp.data.equals(data)){
-				if(tmp == head){
+
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+			if (tmp.data == data || tmp.data.equals(data)) {
+				if (tmp == head) {
 					head = tmp.next;
 					return true;
-				}else if(tmp == tail){
+				} else if (tmp == tail) {
 					previous.next = null;
 					tail = previous;
 					return true;
-				}else{
+				} else {
 					previous.next = tmp.next;
 					return true;
 				}
 			}
 			previous = tmp;
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public T get(int index) {
-		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
-		
+		if (index < 0 || index >= size())
+			throw new IndexOutOfBoundsException();
+
 		int counter = 0;
-		
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(counter == index){
+
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+			if (counter == index) {
 				return tmp.data;
 			}
+			counter++;
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public boolean contains(T data) {
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(tmp.data == data || tmp.data.equals(data)){
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+			if (tmp.data == data || tmp.data.equals(data)) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public int indexOf(T data) {
 		int index = 0;
-		
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(tmp.data == data || tmp.data.equals(data)){
+
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+			if (tmp.data == data || tmp.data.equals(data)) {
 				return index;
 			}
 			index++;
 		}
-		
+
 		return -1;
 	}
 
@@ -212,26 +242,26 @@ public class LinkedList<T> implements ALDAList<T>{
 	public int size() {
 		int size = 0;
 		
-		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
+		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
 			size++;
 		}
-		
+
 		return size;
 	}
-	
-	public String toString(){
-		Node <T> tmp=head;
-		String str="[";
-			for(int i=0; i<this.size(); i++){
-				str+= tmp.data.toString();
-				if(tmp.next != null){
-					str+=", ";
-					tmp=tmp.next;
-				}
-			}
 
-		return str+"]";
+	public String toString() {
+		Node<T> tmp = head;
+		String str = "[";
+		for (int i = 0; i < this.size(); i++) {
+			str += tmp.data.toString();
+			if (tmp.next != null) {
+				str += ", ";
+				tmp = tmp.next;
+			}
+		}
+
+		return str + "]";
 	}
-	
-	
+
+
 }
