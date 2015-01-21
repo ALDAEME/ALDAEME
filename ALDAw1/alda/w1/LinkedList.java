@@ -27,10 +27,17 @@ package alda.w1;
 
 import java.util.Iterator;
 
+import alda.linear.List.Node;
+
+//<<<<<<< Updated upstream
+//=======
+
+//>>>>>>> Stashed changes
 public class LinkedList<T> implements ALDAList<T>{
 	/** This is the node that represents an element in the list.
 	 * It also contains the actual data.
 	 */
+
 	private static class Node<T> {
 		T data;
 		Node<T> next;
@@ -62,23 +69,37 @@ public class LinkedList<T> implements ALDAList<T>{
 
 	@Override
 	public void add(int index, T data) {
-		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
+		if(index < 0 || index > size()) throw new IndexOutOfBoundsException();
 		
 		
-		if(head == null){
-			/* If head is null we will assume that the list is empty. Let's ignore index and add in the data. */
-			head = new Node<T>(data);
-			tail = head;
-		}else{
+		if(head != null){
+			Node<T> newNode = new Node<T>(data);
+			Node<T> previous=head;
 			int counter = 0;
-			
+			if(index==size()){
+				tail.next=newNode;
+				tail=newNode;
+				return;
+			}
 			for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-				if(counter == index - 1){
-					Node<T> newNode = new Node<T>(data);
-					newNode.next = (tmp.next).next;
-					tmp.next = newNode;
+				
+				if(counter == index){
+					
+					
+					if(tmp==head){
+						newNode.next=head;
+						head=newNode;
+						System.out.println("ett");
+					}else{
+						System.out.println("mitten");
+						newNode.next = tmp;
+						previous.next=newNode;
+					}	
 				}
-				index++;
+			
+				previous=tmp;
+				counter++;
+				System.out.println(counter);
 			}
 		}
 	}
