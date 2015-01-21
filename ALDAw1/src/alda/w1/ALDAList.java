@@ -1,6 +1,6 @@
 /**
  * 
- * ALDA - inlï¿½mning 1
+ * ALDA - inlämning 1
  * 
  * @author Elise Edette (tero0337)
  * @author Mios ()
