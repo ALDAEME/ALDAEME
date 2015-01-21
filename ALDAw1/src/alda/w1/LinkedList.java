@@ -27,8 +27,6 @@ package alda.w1;
 
 import java.util.Iterator;
 
-import alda.linear.List.Node;
-
 public class LinkedList<T> implements ALDAList<T>{
 	/** This is the node that represents an element in the list.
 	 * It also contains the actual data.
@@ -68,7 +66,9 @@ public class LinkedList<T> implements ALDAList<T>{
 		
 		
 		if(head == null){
-			
+			/* If head is null we will assume that the list is empty. Let's ignore index and add in the data. */
+			head = new Node<T>(data);
+			tail = head;
 		}else{
 			int counter = 0;
 			
