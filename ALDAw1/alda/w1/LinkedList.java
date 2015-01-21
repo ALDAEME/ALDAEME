@@ -1,6 +1,6 @@
 /**
  * 
- * ALDA - inlämning 1
+ * ALDA - inlï¿½mning 1
  * 
  * @author Elise Edette (tero0337)
  * @author Mios ()
@@ -27,6 +27,12 @@ package alda.w1;
 
 import java.util.Iterator;
 
+import alda.linear.List.Node;
+
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 //<<<<<<< Updated upstream
 //=======
 
@@ -67,40 +73,43 @@ public class LinkedList<T> implements ALDAList<T>{
 
 	@Override
 	public void add(int index, T data) {
-		if(index < 0 || index > size()) throw new IndexOutOfBoundsException();
-		
-		
-		if(head != null){
+		if (index < 0 || index > size())
+			throw new IndexOutOfBoundsException();
+
+		if(head == null){
+			add(data);
+			return;
+		}
+
 			Node<T> newNode = new Node<T>(data);
-			Node<T> previous=head;
-			int counter = 0;
-			if(index==size()){
-				tail.next=newNode;
-				tail=newNode;
+			Node<T> previous = head;
+			
+			if (index == size()) {
+				tail.next = newNode;
+				tail = newNode;
+				System.out.println("last");
 				return;
 			}
-			for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-				
-				if(counter == index){
-					
-					
-					if(tmp==head){
-						newNode.next=head;
-						head=newNode;
-						System.out.println("ett");
-					}else{
-						System.out.println("mitten");
+			int counter = 0;
+			for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
+
+				if (counter == index) {
+
+					if (tmp == head) {
+						newNode.next = head;
+						head = newNode;
+						return;
+					} else {
 						newNode.next = tmp;
-						previous.next=newNode;
-					}	
+						previous.next = newNode;
+						return;
+					}
 				}
-			
-				previous=tmp;
+
+				previous = tmp;
 				counter++;
-				System.out.println(counter);
 			}
 		}
-	}
 
 	@Override
 	public T remove(int index) {
