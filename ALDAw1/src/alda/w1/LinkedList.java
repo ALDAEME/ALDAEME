@@ -1,6 +1,6 @@
 /**
  * 
- * ALDA - inlämning 1
+ * ALDA - inlï¿½mning 1
  * 
  * @author Elise Edette (tero0337)
  * @author Mios ()
@@ -12,7 +12,7 @@
 /* Temporary note-board
  * --------------------
  * 
- * Elise(19jan): ska vi kanske ha en "sentinel" så vi slipper edge cases?
+ * Elise(19jan): ska vi kanske ha en "sentinel" sï¿½ vi slipper edge cases?
  * Elise(19jan): TODO: throw exceptions, JUnit, check List interface docs so we have matching behavior. Document (javadoc) all the things!
  * 
  * 
@@ -26,6 +26,8 @@
 package alda.w1;
 
 import java.util.Iterator;
+
+import alda.linear.List.Node;
 
 public class LinkedList<T> implements ALDAList<T>{
 	/** This is the node that represents an element in the list.
@@ -171,6 +173,20 @@ public class LinkedList<T> implements ALDAList<T>{
 		}
 		
 		return size;
+	}
+	
+	public String toString(){
+		Node <T> tmp=head;
+		String str="[";
+			for(int i=0; i<this.size(); i++){
+				str+= tmp.data.toString();
+				if(tmp.next != null){
+					str+=", ";
+					tmp=tmp.next;
+				}
+			}
+
+		return str+"]";
 	}
 	
 	
