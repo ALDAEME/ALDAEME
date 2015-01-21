@@ -1,6 +1,6 @@
 /**
  * 
- * ALDA - inlï¿½mning 1
+ * ALDA - inlämning 1
  * 
  * @author Elise Edette (tero0337)
  * @author Mios ()
@@ -26,8 +26,6 @@
 package alda.w1;
 
 import java.util.Iterator;
-
-import alda.linear.List.Node;
 
 //<<<<<<< Updated upstream
 //=======
@@ -109,13 +107,23 @@ public class LinkedList<T> implements ALDAList<T>{
 		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
 		
 		int counter = 0;
+		Node<T> previous = null;
 		
 		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
-			if(counter == index - 1){
-				tmp.next = (tmp.next).next;
-				
-				return (tmp.next).data;
+			if(counter == index){
+				if(tmp == head){
+					head = tmp.next;
+					return tmp.data;
+				}else if(tmp == tail){
+					previous.next = null;
+					tail = previous;
+					return tmp.data;
+				}else{
+					previous.next = tmp.next;
+					return tmp.data;
+				}
 			}
+			previous = tmp;
 		}
 		
 		return null;
@@ -123,14 +131,20 @@ public class LinkedList<T> implements ALDAList<T>{
 
 	@Override
 	public boolean remove(T data) {
-		Node<T> previous;
+		Node<T> previous = null;
 		
 		for(Node<T> tmp = head; tmp != null; tmp = tmp.next){
 			if(tmp.data == data || tmp.data.equals(data)){
 				if(tmp == head){
-					
+					head = tmp.next;
+					return true;
+				}else if(tmp == tail){
+					previous.next = null;
+					tail = previous;
+					return true;
 				}else{
-					
+					previous.next = tmp.next;
+					return true;
 				}
 			}
 			previous = tmp;
