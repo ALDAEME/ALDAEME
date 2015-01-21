@@ -46,11 +46,11 @@ public class ALDAListTest {
 	// These two methods are the only places in the code that mentions the name
 	// of your class.
 	private static ALDAList<String> createNewList() {
-		return new MyALDAList<String>();
+		return new LinkedList<String>();
 	}
 
 	private static ALDAList<Integer> createIntegerList() {
-		return new MyALDAList<Integer>();
+		return new LinkedList<Integer>();
 	}
 
 	private ALDAList<String> list = createNewList();
