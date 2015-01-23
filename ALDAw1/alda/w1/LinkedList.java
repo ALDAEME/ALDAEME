@@ -2,21 +2,13 @@ package alda.w1;
 
 /**
  * 
- * ALDA - inlämning 1
+ * ALDA - inl�mning 1
  * 
- * @author Elise Edette (tero0337)
- * @author Mios ()
- * @author Emma Persson (empe5691)
+ * @author Elise Edette (tero0337) tero0337@student.su.se
+ * @author Aframyeos Rohoum (afro0793) mios.roham@hotmail.com
+ * @author Emma Persson (empe5691) emma.e.persson@me.com
  * @version 1.0 Jan 2015
  */
-
-/* Temporary note-board
- * --------------------
- * 
- * Elise(19jan): ska vi kanske ha en "sentinel" så vi slipper edge cases?
- * Elise(19jan): TODO: throw exceptions, JUnit, check List interface docs so we have matching behavior. Document (javadoc) all the things!
- *  
- *---------------------*/
 
 import java.util.Iterator;
 
@@ -37,18 +29,19 @@ public class LinkedList<T> implements ALDAList<T> {
 	private Node<T> head;
 	private Node<T> tail;
 
+	/**
+	 * This class is used as the iterator for the list.
+	 * */
 	private class LinkedListIterator implements Iterator<T>{
 		private Node <T> current= head;
 		private boolean remove=false;
 
-		@Override
 		public boolean hasNext() {
 			if(current!=null) 
 				return current!=tail.next;
 			return false;
 		}
 
-		@Override
 		public T next() {
 			if(!hasNext()){
 				throw new java.util.NoSuchElementException();
@@ -60,7 +53,6 @@ public class LinkedList<T> implements ALDAList<T> {
 
 		}
 
-		@Override
 		public void remove() {
 			if(!remove){
 				throw new IllegalStateException();
@@ -80,12 +72,14 @@ public class LinkedList<T> implements ALDAList<T> {
 		}
 
 	}
-	@Override
+	
 	public Iterator<T> iterator() {
 		return new LinkedListIterator();
 	}
 
-	@Override
+	/**
+	 * Adds an element to the end of the list.
+	 * */
 	public void add(T data) {
 		if (head == null) {
 			head = new Node<T>(data);
@@ -96,7 +90,11 @@ public class LinkedList<T> implements ALDAList<T> {
 		}
 	}
 
-	@Override
+	/**
+	 * Adds an element to the specified position, if the position is occupied the element in that position is shifted forward.
+	 * @param	index	positive integer that specifies the position in the list to add to.
+	 * @param	data	is the payload/data to store in the list.
+	 * */
 	public void add(int index, T data) {
 		if (index < 0 || index > size())
 			throw new IndexOutOfBoundsException();
@@ -136,7 +134,10 @@ public class LinkedList<T> implements ALDAList<T> {
 	}
 
 
-	@Override
+	/**
+	 * Removes an element from specified position, shifts the right hand elements to fill the gap.
+	 * @param	index	positive integer that specifies the position in the list to remove from.
+	 * */
 	public T remove(int index) {
 		if (index < 0 || index >= size())
 			throw new IndexOutOfBoundsException();
@@ -164,7 +165,6 @@ public class LinkedList<T> implements ALDAList<T> {
 		return null;
 	}
 
-	@Override
 	public boolean remove(T data) {
 		Node<T> previous = null;
 
@@ -188,7 +188,6 @@ public class LinkedList<T> implements ALDAList<T> {
 		return false;
 	}
 
-	@Override
 	public T get(int index) {
 		if (index < 0 || index >= size())
 			throw new IndexOutOfBoundsException();
@@ -205,7 +204,6 @@ public class LinkedList<T> implements ALDAList<T> {
 		return null;
 	}
 
-	@Override
 	public boolean contains(T data) {
 		for (Node<T> tmp = head; tmp != null; tmp = tmp.next) {
 			if (tmp.data == data || tmp.data.equals(data)) {
@@ -216,7 +214,6 @@ public class LinkedList<T> implements ALDAList<T> {
 		return false;
 	}
 
-	@Override
 	public int indexOf(T data) {
 		int index = 0;
 
@@ -230,13 +227,11 @@ public class LinkedList<T> implements ALDAList<T> {
 		return -1;
 	}
 
-	@Override
 	public void clear() {
 		head = null;
 		tail = null;
 	}
 
-	@Override
 	public int size() {
 		int size = 0;
 
